@@ -23,6 +23,7 @@ func NewDoctron() *iris.Application {
 		convert.Use(middleware.AuthMiddleware)
 		convert.Use(middleware.CheckRateLimiting)
 		convert.Get("/html2pdf", controller.Html2PdfHandler)
+		convert.Get("/html2html", controller.Html2HtmlHandler)
 		convert.Get("/html2image", controller.Html2ImageHandler)
 		convert.Get("/pdf2image", controller.Pdf2ImageHandler)
 		convert.Get("/pdfAddWatermark", controller.PdfAddWatermarkHandler)
