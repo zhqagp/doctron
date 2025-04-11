@@ -21,3 +21,5 @@ COPY --from=builder  /usr/local/bin/doctron /usr/local/bin/doctron
 COPY conf/default.yaml /doctron.yaml
 EXPOSE 8080
 CMD ["dumb-init", "doctron", "--config", "/doctron.yaml"]
+
+
