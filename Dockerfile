@@ -17,6 +17,21 @@ RUN cd /doctron && \
 FROM lampnick/runtime:chromium-alpine
 
 MAINTAINER lampnick <nick@lampnick.com>
+
+
+# @build-example docker build . -f Dockerfile -t harbor.cpcti.com/library/doctron:latest
+
+
+
+RUN set -ex \
+    && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
+    && wget https://cpcti-log.oss-cn-beijing.aliyuncs.com/SourceHanSansCN.zip \
+    && unzip SourceHanSansCN.zip \
+    && cp SubsetOTF/CN/* /usr/share/fonts/ \
+    && rm -rf SubsetOTF LICENSE.txt \
+    && apk add --no-cache fontconfig ttf-dejavu \
+    && fc-cache -fv
+
 COPY --from=builder  /usr/local/bin/doctron /usr/local/bin/doctron
 COPY conf/default.yaml /doctron.yaml
 EXPOSE 8080
